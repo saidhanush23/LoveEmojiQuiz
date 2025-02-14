@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Emoji Quiz 💖</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #ffe6f2; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border-radius: 10px; background: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); }
+        h1 { color: #ff4081; }
+        .badge { font-size: 18px; font-weight: bold; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-bottom: 10px; }
+        .easy { background: #4CAF50; color: white; } 
+        .medium { background: #ff9800; color: white; }
+        .hard { background: #d81b60; color: white; }
+        button { background: #ff4081; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 5px; margin: 5px; }
+        button:hover { background: #d81b60; }
+        .option-btn { background: #ff80ab; border: none; padding: 10px; width: 80%; margin: 5px; cursor: pointer; border-radius: 5px; }
+        .option-btn:hover { background: #d81b60; }
+        #emojiStory, #message, #result, #levelTransition, #finalMessage { font-size: 20px; font-weight: bold; display: none; }
+        #nextBtn { display: none; } 
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💖 Love Emoji Quiz 💖</h1>
+        <div id="startScreen">
+            <p>Welcome to the Love Emoji Quiz! Click start to begin your journey. ✨</p>
+            <button onclick="startGame()">Start 🚀</button>
+        </div>
+        
+        <p id="levelBadge" class="badge"></p>
+        <p id="emojiStory"></p>
+        <div id="options"></div>
+        <p id="result"></p>
+        <p id="levelTransition"></p>
+        <button id="nextBtn" onclick="nextQuestion()">Next ➡️</button>
+        <p id="finalMessage"></p>
+    </div>
+
+    <script>
+        const questions = [
+        { level: "Easy", badge: "easy", emoji: "💘💏💖", story: "Two people fell in love.", options: ["A couple went shopping.", "Two people fell in love.", "Friends met after a long time."] },
+            { level: "Easy", badge: "easy", emoji: "💑💍💒", story: "A couple got engaged and married.", options: ["Two people became best friends.", "A wedding planner decorated a hall.", "A couple got engaged and married."] },
+            { level: "Easy", badge: "easy", emoji: "💘📩💌", story: "Someone sent a love letter.", options: ["Someone sent a love letter.", "A person mailed a party invitation.", "A secret admirer sent a mystery note."] },
+            { level: "Easy", badge: "easy", emoji: "💖🍫🌹", story: "A person gifted chocolates and roses.", options: ["A person gifted chocolates and roses.", "A chef baked a cake.", "A friend invited someone to dinner."] },
+            { level: "Easy", badge: "easy", emoji: "💏🌙⭐", story: "A couple had a romantic night under the stars.", options: ["A couple had a romantic night under the stars.", "People watched a meteor shower.", "Friends went for a night walk."] },
+
+            { transition: "🔥 Great job! You're moving to Medium Level. Love is in the air! 😍" },
+
+            { level: "Medium", badge: "medium", emoji: "💑💖💬💍", story: "A couple fell in love, proposed, and got engaged.", options: ["A best friend gifted a promise ring.", "A couple fell in love, proposed, and got engaged.", "Two people had a business meeting."] },
+            { level: "Medium", badge: "medium", emoji: "💌📱💞💬", story: "A long-distance couple kept in touch.", options: ["A long-distance couple kept in touch.", "Friends made a WhatsApp group.", "Someone planned a surprise birthday party."] },
+            { level: "Medium", badge: "medium", emoji: "🎶🎤💑💞", story: "A couple enjoyed a romantic karaoke night.", options: ["A couple enjoyed a romantic karaoke night.", "A person performed at a concert.", "Friends played video games together."] },
+            { level: "Medium", badge: "medium", emoji: "💑🛥️🌊💞", story: "A couple went on a romantic boat ride.", options: ["A couple went on a romantic boat ride.", "Friends went on a fishing trip.", "A group of tourists explored a new city."] },
+            { level: "Medium", badge: "medium", emoji: "🎥🍿💏💞", story: "A couple watched a romantic movie.", options: ["A family had a movie night.", "A couple watched a romantic movie.", "Friends watched a thriller film."] },
+
+            { transition: "💪 Now it's time for the Hard Level! Love is complicated, but you're up for the challenge! ❤️‍🔥" },
+
+            { level: "Hard", badge: "hard", emoji: "💖✈️💏🌍🎆", story: "A couple traveled around the world in love.", options: ["A solo traveler explored cities.", "A couple traveled around the world in love.", "An influencer documented travels."] },
+            { level: "Hard", badge: "hard", emoji: "💑💍🏝️🌅💞", story: "A couple had a sunset beach proposal.", options: ["A photographer captured beach photos.", "A couple had a sunset beach proposal.", "Friends went on a vacation."] },
+            { level: "Hard", badge: "hard", emoji: "📖💞💏🌹🎶", story: "A couple read love poems to each other.", options: ["A literature class studied poetry.", "A couple read love poems to each other.", "A musician wrote a song."] },
+            { level: "Hard", badge: "hard", emoji: "💏⛷️❄️🔥💞", story: "A couple enjoyed a cozy winter vacation.", options: ["A couple enjoyed a cozy winter vacation.", "A group of friends went skiing.", "A family visited a winter resort."] },
+            { level: "Hard", badge: "hard", emoji: "🎁💞💏🎂🎉", story: "A person planned a romantic birthday surprise.", options: ["A company organized an office event.", "A person planned a romantic birthday surprise.", "A chef baked a special cake."] }
+        ];
+        let currentQuestion = -1;
+
+        function startGame() {
+            document.getElementById("startScreen").style.display = "none";
+            document.getElementById("nextBtn").style.display = "inline-block";
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+
+            if (currentQuestion >= questions.length) {
+                document.getElementById("finalMessage").innerText = "🎉 Congratulations! You've completed the Love Emoji Quiz! 💖";
+                document.getElementById("finalMessage").style.display = "block";
+                document.getElementById("emojiStory").style.display = "none";
+                document.getElementById("options").style.display = "none";
+                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("levelBadge").style.display = "none";
+                return;
+            }
+
+            const question = questions[currentQuestion];
+
+            if (question.transition) {
+                document.getElementById("levelTransition").innerText = question.transition;
+                document.getElementById("levelTransition").style.display = "block";
+                document.getElementById("emojiStory").style.display = "none";
+                document.getElementById("options").style.display = "none";
+                document.getElementById("levelBadge").style.display = "none";
+                document.getElementById("result").style.display = "none";
+                return;
+            } else {
+                document.getElementById("levelTransition").style.display = "none";
+                document.getElementById("emojiStory").style.display = "block";
+                document.getElementById("options").style.display = "block";
+                document.getElementById("levelBadge").style.display = "inline-block";
+            }
+
+            document.getElementById("emojiStory").innerText = question.emoji;
+            document.getElementById("levelBadge").innerText = question.level;
+            document.getElementById("levelBadge").className = `badge ${question.badge}`;
+
+            let optionsHTML = "";
+            question.options.forEach(option => {
+               optionsHTML += `<button class="option-btn" onclick="checkAnswer('${option}', '${question.story}')">${option}</button>`;
+            });
+            document.getElementById("options").innerHTML = optionsHTML;
+            document.getElementById("result").style.display = "none";
+        }
+
+function checkAnswer(selectedOption, correctAnswer) {
+    const resultEl = document.getElementById("result");
+    const optionsButtons = document.querySelectorAll(".option-btn");
+
+    // Loop through all options and update their colors
+    optionsButtons.forEach(button => {
+        // If the selected option is correct, highlight it in green
+        if (button.innerText === selectedOption) {
+            if (selectedOption === correctAnswer) {
+                button.style.backgroundColor = "#4CAF50"; // Green for correct answer
+            } else {
+                button.style.backgroundColor = "#f44336"; // Red for incorrect answer
+            }
+        } else {
+            button.style.backgroundColor = ""; // Reset background for other options
+        }
+    });
+
+    // Display the result message
+    if (selectedOption === correctAnswer) {
+        resultEl.innerHTML = "✅ Correct! Well done!";
+        resultEl.style.color = "green";
+    } else {
+        resultEl.innerHTML = "❌ Oops! Try again.";
+        resultEl.style.color = "red";
+    }
+    resultEl.style.display = "block";
+
+    // Enable the next button after an option is selected
+    document.getElementById("nextBtn").disabled = false;
+}
+
+    </script>
+</body>
+</html> 
+
