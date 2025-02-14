@@ -1,0 +1,29 @@
+📌 Project Description:
+The Love Emoji Quiz is an interactive web-based quiz game that challenges users to guess the correct meaning of love-related emojis.
+The game presents multiple-choice options and provides instant feedback on the user's selection.
+
+🚀 Features
+
+🎨 User-friendly interface with attractive emoji-based questions.
+
+✅ Instant feedback with color-coded results.
+
+🔁 Retry option to attempt the quiz multiple times.
+
+🛠️ Technologies Used
+
+HTML - Structure of the quiz.
+
+CSS - Styling and visual design.
+
+JavaScript - Logic and interactivity.
+
+🎮 How to Play
+
+Open index.html in a web browser.
+
+Read the question and select an answer from the options.
+
+Get instant feedback on your choice.
+
+👨‍💻 Developed by: Sai Dhanush Gavini
